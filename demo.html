@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Divs with Images and Text</title>
+<link rel="stylesheet" href="workers.css">
+</head>
+<body>
+    
+        
+    <div id="bookholder">
+      <!-- Books will be dynamically populated here -->
+    </div>
+    <script >
+// Define your verses variable (simulating as an external file)
+
+
+
+// Function to create and populate books dynamically
+function populateBooks() {
+  const bookholder = document.getElementById('bookholder');
+
+  for (const key in verses) {
+    if (verses.hasOwnProperty(key)) {
+        console.log(key)
+      const book = verses[key];
+      
+      const bookDiv = document.createElement('div');
+      bookDiv.classList.add('books');
+      bookDiv.id = key; 
+      
+      const bookFace = document.createElement('div');
+      bookFace.classList.add('bookface');
+      const img = document.createElement('img');
+      img.src = "./photos/"+key+".jpg";
+      img.alt = book.name;
+      bookFace.appendChild(img);
+      
+      const bookName = document.createElement('div');
+      bookName.classList.add('bookname');
+      const span = document.createElement('span');
+      span.textContent = key;
+      bookName.appendChild(span);
+      
+      bookDiv.appendChild(bookFace);
+      bookDiv.appendChild(bookName);
+      
+      bookholder.appendChild(bookDiv);
+      
+    }
+  }
+}
+    const booknameforchapter=""
+document.addEventListener('DOMContentLoaded', populateBooks);
+ document.getElementById('bookholder').addEventListener('click', function(event) {
+        const clickedBook = event.target.closest('.books');
+        if (clickedBook) {
+            const bookName = clickedBook.id; // Get the id of the clicked book
+            console.log(`Clicked on book: ${bookName}`);
+            window.location.href = `chapterPage.html?book=${encodeURIComponent(bookName)}`;
+            booknameforchapter=bookName;
+
+        }
+    });
+
+    </script>
+    <script src="data.js"></script>
+  </body>
+</html>

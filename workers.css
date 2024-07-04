@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#bookholder {
+    border: 1px solid black;
+    width: 100%;
+    padding: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+    justify-content: center; /* Center items horizontally */
+}
+
+.books {
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 27%; /* 27% width for each book container */
+    height: auto; /* Allow height to adjust to content */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Ensures padding is included in width calculation */
+}
+.books:hover{
+    transform: scale(1.1); 
+        transition: transform 0.3s ease; 
+}
+.bookface img {
+    max-width: 100%; /* Ensure the image does not exceed the container width */
+    height: auto; /* Allow the height to adjust proportionally */
+    border-radius: 5px; /* Optional: adds rounded corners to images */
+    object-fit: contain; /* Ensures the image fits within the container */
+}
+
+.bookname {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .books {
+        width: 100%; /* Full width for smaller screens */
+    }
+}
+.bookface img.zoom-effect {
+    transform: scale(1.1); /* Adjust the scale factor for zoom effect */
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
