@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapters</title>
+<link rel="stylesheet" href="workers.css">
+</head>
+<body>
+    <div id="bookholder">
+      <!-- Chapters will be dynamically populated here -->
+    </div>
+
+      <script src="data.js"></script>
+    <script>
+              lister={}
+
+        function getBookNameFromURL() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.get('book');
+        }            const bookName = getBookNameFromURL();
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log(`Book Name: ${bookName}`);
+
+            if (typeof verses !== 'undefined') {
+                const chaptersOfBook = verses[bookName];
+
+
+                
+                const bookholder = document.getElementById('bookholder');
+
+                for (const key in verses[bookName]) {
+                if (verses[bookName].hasOwnProperty(key)) {
+                    console.log(key)
+                    const book = verses[key];
+                    const bookDiv = document.createElement('div');
+                    bookDiv.classList.add('books');
+                    bookDiv.id = key; 
+                    
+                    const bookFace = document.createElement('div');
+                    bookFace.classList.add('bookface');
+                    const img = document.createElement('img');
+                    img.src = "./photos/"+key+".jpg";
+                    bookFace.appendChild(img);
+                    
+                    const bookName = document.createElement('div');
+                    bookName.classList.add('bookname');
+                    const span = document.createElement('span');
+                    span.textContent = key;
+                    bookName.appendChild(span);
+                    
+                    bookDiv.appendChild(bookFace);
+                    bookDiv.appendChild(bookName);
+                    
+                    bookholder.appendChild(bookDiv);
+                    
+                }
+}
+                
+
+            } else {
+                console.error('verses is not defined or accessible.');
+            }
+        });
+
+        document.getElementById('bookholder').addEventListener('click', function(event) {
+        const clickedBook = event.target.closest('.books');
+        if (clickedBook) {
+            const ider = clickedBook.id+"a"+getBookNameFromURL();
+            console.log(ider)
+            localStorage.setItem('myList', JSON.stringify(verses[bookName]));
+            console.log(verses[getBookNameFromURL()][ider])
+            const verseUrl = `verse.html?chap=${encodeURIComponent(ider)}`;
+            window.location.href = verseUrl;
+        }
+        
+    });
+
+    </script>
+</body>
+</html>
