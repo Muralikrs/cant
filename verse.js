@@ -72,8 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById("m").addEventListener("click", function() {
-        const audioAddress = `./audio/${pname}/${ci+1}.mp4`;
-        console.log(audioAddress)
+        const audioAddress = `./audio/${pname}/${ci+1}.mp3`;
         playAudio(audioAddress);
     });
 
@@ -116,3 +115,25 @@ function stopAudio() {
         currentAudio = null;
     }
 }
+function checkIntersection() {
+    const btd = document.getElementById('btd');
+    const border = document.getElementById('border');
+  
+    if (!btd || !border) {
+      console.error('One or both elements not found.');
+      return false;
+    }
+  
+    const btdRect = btd.getBoundingClientRect();
+    const borderRect = border.getBoundingClientRect();
+  
+    // Check for intersection
+    const intersects = !(
+      btdRect.right < borderRect.left ||
+      btdRect.left > borderRect.right ||
+      btdRect.bottom < borderRect.top ||
+      btdRect.top > borderRect.bottom
+    );
+  
+    return !intersects; 
+  }
