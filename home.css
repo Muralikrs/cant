@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box; 
+    font-size: 7;
+}
+img{
+    width: 5%;
+    height: auto;
+}
+
+#base {
+    border: 1px solid black;
+    height: 94vh; 
+    width: 94vw;
+    margin: 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+#content {
+    height: 100%; 
+    width: 100%;
+}
+
+
+
+#top, #bottom {
+    height: 10%;
+    
+    
+}
+
+#mid {
+    height: 80%;
+}
+#topelm {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px; 
+    
+}
+#info{
+    margin-right: 5%;
+}
+#mid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#vcont{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+#info {
+    margin-right: 5px;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: .5px solid black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top:100;
+    right: 0;
+    height: 30vh;
+
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33.3%; /* Equal height for each section */
+}
+
+.section p {
+    margin: 0;
+}
+.ff{
+    height: 100%;
+    width: 100%;
+    border: .5px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#user,#bookmark{    border: .5px solid black;
+}
+.fontinc:hover{
+    color: white;
+    background-color: black;
+}
+.fontdec:hover{
+    color: white;
+    background-color: black;
+}
+#bookmark:hover{
+    color: white;
+    background-color: black;
+}
+#user:hover{
+    color: white;
+    background-color: black;
+}
