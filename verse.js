@@ -7,11 +7,12 @@ function load() {
     const verseElement = document.getElementById("verse");
     if (verseElement) {
         stopAudio();
-        verseElement.innerHTML = dataf[ci]; // Assuming `dataf` is a string or can be converted to a string
+        verseElement.innerHTML = dataf[ci];
     }
 }
 
 function getchapNameFromURL() {
+    
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     let d = urlParams.get('chap');
@@ -51,7 +52,38 @@ document.addEventListener('DOMContentLoaded', () => {
         load();   
     });
 
-    document.getElementById("a+").addEventListener("click", function() {
+
+// Function to toggle the dropdown visibility
+function toggleDropdown() {
+    const dropdown = document.getElementById('myDropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Add event listeners to dropdown sections
+document.getElementById("fu").addEventListener("click",function(){
+
+});
+document.getElementById('user').addEventListener('click', function() {
+    handleSectionClick('User');
+});
+
+// Function to handle section click
+function handleSectionClick(sectionName) {
+    alert(`Clicked ${sectionName}`);
+    // Perform actions based on which section was clicked
+    // For example, navigate to a different page, load content, etc.
+}
+
+
+
+
+
+
+
+
+
+
+    document.getElementById("fu").addEventListener("click", function() {
         const verseElement = document.getElementById("verse");
         if (verseElement) {
             stopAudio();
@@ -60,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById("a-").addEventListener("click", function() {
+    document.getElementById("fd").addEventListener("click", function() {
         const verseElement = document.getElementById("verse");
         if (verseElement) {
             stopAudio();
@@ -137,3 +169,16 @@ function checkIntersection() {
   
     return !intersects; 
   }
+  mark=false
+  document.getElementById("bookmarks").addEventListener("click",function(){
+      if(mark){
+      document.getElementById("bookmarks").src="./photos/untick.png"
+      mark=false
+      }
+      else{
+      document.getElementById("bookmarks").src="./photos/tickstar.png"
+          mark=true
+      }
+  
+  
+  });
