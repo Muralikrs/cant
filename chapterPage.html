@@ -73,7 +73,7 @@
             console.log(ider)
             localStorage.setItem('myList', JSON.stringify(verses[bookName]));
             console.log(verses[getBookNameFromURL()][ider])
-            const verseUrl = `verse.html?chap=${encodeURIComponent(ider)}`;
+            const verseUrl = `home.html?chap=${encodeURIComponent(ider)}`;
             window.location.href = verseUrl;
         }
         
