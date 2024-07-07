@@ -7,7 +7,9 @@ function load() {
     const verseElement = document.getElementById("verse");
     if (verseElement) {
         stopAudio();
+        ismarked(pname,ci)
         verseElement.innerHTML = dataf[ci];
+
     }
 }
 
@@ -17,19 +19,32 @@ function getchapNameFromURL() {
     const urlParams = new URLSearchParams(queryString);
     let d = urlParams.get('chap');
     if (d) {
+        if(!d.includes('n')){
+            console.log(d)
         const indexOfA = d.indexOf('a');
         pname = d.substring(0, indexOfA);
-        bname = d.substring(indexOfA + 1);
-        dataf = verses[bname] ? verses[bname][pname] : [];
+        bname = d.substring(indexOfA + 1);}
+        else{
+            console.log(d)
+            bname = d.substring(0, d.indexOf('a'));
+            pname = d.substring(d.indexOf('a') + 1,d.indexOf('n'));
+            ci=Number(d.substring(d.indexOf('n')+1))
+            console.log(pname+"\n"+bname)
+        }
+        dataf = verses[bname] ? verses[bname][pname] : [];}
+        console.log(dataf)
         load();
     }
-}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const headingElement = document.querySelector('.heading');
     if (headingElement) {
         getchapNameFromURL();
+
         headingElement.textContent = pname;
+        console.log(  ismarked(bname+"a"+pname,ci))
+
     } else {
         console.error('Element with class "heading" not found.');
     }
@@ -64,7 +79,22 @@ document.getElementById("fu").addEventListener("click",function(){
 
 });
 document.getElementById('user').addEventListener('click', function() {
-    handleSectionClick('User');
+    var confirmed = window.confirm("Are you sure you want restart ?");
+
+    // If user confirms (clicks OK), remove 'hist'
+    if (confirmed) {
+        // Check and remove 'hist' from localStorage
+        if (localStorage.getItem('hist')) {
+            localStorage.removeItem('hist');
+        }
+
+        // Check and remove 'hist' from sessionStorage
+        if (sessionStorage.getItem('hist')) {
+            sessionStorage.removeItem('hist');
+        }
+    } else {
+    }
+
 });
 
 // Function to handle section click
@@ -147,38 +177,8 @@ function stopAudio() {
         currentAudio = null;
     }
 }
-function checkIntersection() {
-    const btd = document.getElementById('btd');
-    const border = document.getElementById('border');
-  
-    if (!btd || !border) {
-      console.error('One or both elements not found.');
-      return false;
-    }
-  
-    const btdRect = btd.getBoundingClientRect();
-    const borderRect = border.getBoundingClientRect();
-  
-    // Check for intersection
-    const intersects = !(
-      btdRect.right < borderRect.left ||
-      btdRect.left > borderRect.right ||
-      btdRect.bottom < borderRect.top ||
-      btdRect.top > borderRect.bottom
-    );
-  
-    return !intersects; 
-  }
-  mark=false
-  document.getElementById("bookmarks").addEventListener("click",function(){
-      if(mark){
-      document.getElementById("bookmarks").src="./photos/untick.png"
-      mark=false
-      }
-      else{
-      document.getElementById("bookmarks").src="./photos/tickstar.png"
-          mark=true
-      }
-  
-  
+  document.getElementById("bookmark").addEventListener("click",function(){
+    const verseUrl = `bookmark.html`;
+    window.location.href = verseUrl;
   });
+ 
