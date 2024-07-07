@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bookmarks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+            font-size: 16px; /* Set a default font size */
+        }
+        #base {
+            border: 1px solid black;
+            height: 94vh;
+            width: 94vw;
+            margin: 3%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .optn {
+            border: 1px solid black;
+            width: 94%;
+            margin-top: 2%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            cursor: pointer; /* Add cursor pointer for clickable behavior */
+        }
+        .optn:hover {
+            background-color: #f0f0f0; /* Highlight on hover */
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content {
+            display: block;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: black;
+        }
+        .dropdown-content:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div id="base">
+        <!-- Options will be dynamically added here -->
+    </div>
+
+    <script>
+        // Function to load bookmarks from local storage
+        function loadBookmarks() {
+            let bookmarks = JSON.parse(localStorage.getItem('hist')) || {}; // Get bookmarks from localStorage
+            let base = document.getElementById('base');
+            
+            // Clear existing content
+            base.innerHTML = '';
+
+            // Loop through bookmarks and create option elements
+            for (let key in bookmarks) {
+                if (bookmarks.hasOwnProperty(key)) {
+                    let optn = document.createElement('div');
+                    optn.classList.add('optn');
+                    optn.setAttribute('data-key', key); // Store bookmark key as data attribute
+                    
+                    // Display bookmark name
+                    console.log(key)
+                    optn.innerHTML = `<div id="name">${key.substring(key.indexOf('a')+1)}</div>`;
+                    
+                    // Create dropdown for options
+                    let dropdown = document.createElement('div');
+                    dropdown.classList.add('dropdown');
+                    
+                    // Create options in dropdown
+                    bookmarks[key].forEach((item, index) => {
+                        let option = document.createElement('div');
+                        option.classList.add('dropdown-content');
+                        option.innerText = item;
+                        option.addEventListener('click', function() {
+                            // Handle deletion of specific item
+                            ider=key+"n"+item
+                            console.log(ider)
+                            const verseUrl = `home.html?chap=${encodeURIComponent(ider)}`;
+            window.location.href = verseUrl;
+
+                        });
+                        dropdown.appendChild(option);
+                    });
+
+                    // Append dropdown to option element
+                    optn.appendChild(dropdown);
+
+                    // Click handler to toggle dropdown visibility
+                    optn.addEventListener('click', function() {
+                        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+                    });
+
+                    // Append option to base container
+                    base.appendChild(optn);
+                }
+            }
+        }
+
+        // Function to delete specific item from bookmark
+        function deleteItem(bookmarkKey, index) {
+            let bookmarks = JSON.parse(localStorage.getItem('hist')) || {};
+            if (bookmarks.hasOwnProperty(bookmarkKey)) {
+                bookmarks[bookmarkKey].splice(index, 1); // Remove item from array
+                localStorage.setItem('hist', JSON.stringify(bookmarks)); // Save updated bookmarks
+                loadBookmarks(); // Reload bookmarks display
+            }
+        }
+
+        // Initially load bookmarks when the page loads
+        loadBookmarks();
+    </script>
+</body>
+</html>
