@@ -88,11 +88,10 @@
                     bookmarks[key].forEach((item, index) => {
                         let option = document.createElement('div');
                         option.classList.add('dropdown-content');
-                        option.innerText = item;
+                        option.innerText = index+1;
                         option.addEventListener('click', function() {
                             // Handle deletion of specific item
                             ider=key+"n"+item
-                            console.log(ider)
                             const verseUrl = `home.html?chap=${encodeURIComponent(ider)}`;
             window.location.href = verseUrl;
 
